@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>La Casa Grande - Estacionamiento</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="stylers.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+
+	<!-- F O N T S -->
+	<link href="fonts/css/all.css" rel="stylesheet"> <!--load all styles -->
+	<link href="fonts/css/iconmonstr-iconic-font.css" rel="stylesheet"> <!--load all styles -->
+	<link href="fonts/css/iconmonstr-iconic-font.css" rel="stylesheet"> <!--load all styles -->
+	<link href="./fonts/ivy.css" rel="stylesheet">
+	<link href="./fonts/ivy-italic.css" rel="stylesheet">
+	<link href="./fonts/acumin.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!--sS C R I P T S -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script
+	    src="https://code.jquery.com/jquery-3.3.1.js"
+	    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	    crossorigin="anonymous">
+	</script>
+	<script>
+		function isBreakpoint( alias ) {
+			return $('.device-' + alias).is(':visible');
+		}
+
+		$(document).ready(function(){
+			//beta aria-expanded fix 1/30/18
+			//toggles aria-expanded in mobile views using built-in bootstrap function
+			$(".dropdown").on("show.bs.dropdown", function(event){
+				$(this).find('.dropdown-toggle').attr('aria-expanded', 'true');
+			});
+			$(".dropdown").on("hide.bs.dropdown", function(event){
+				$(this).find('.dropdown-toggle').attr('aria-expanded', 'false');
+			});
+
+			if( isBreakpoint('md') || isBreakpoint('lg') || isBreakpoint('xl') ) {
+				//toggles aria-expanded in desktop views when we hack it to open on hover
+				$('.dropdown').hover(function() {
+					$(this).addClass('open');
+					$(this).find('.dropdown-toggle').attr('aria-expanded', 'true');
+				},
+				function() {
+					$(this).removeClass('open');
+					$(this).find('.dropdown-toggle').attr('aria-expanded', 'false');
+				});
+				$("[data-toggle='dropdown']").on("click", function(e){
+					if((e.which == "1") && $(this).is(":hover") && !$(this).parents(".dropdown").hasClass("open")){
+						e.stopImmediatePropagation();
+						if ($(this).attr('target') !== "_blank" ) {
+							document.location=$(this).attr("href");
+						}
+					}
+				});
+			}
+
+			// makes href="tel:#"s valid for browsers
+			$('a[href^="tel"]').each( function(){
+				$(this).attr('href', 'tel:' + $(this).attr('href').replace(/\D+/g,""));
+			});
+
+			// hide link titles on hover
+			var ttext;
+			$(".navbar-nav a").hover(function(){
+				ttext = $(this).attr('title');
+				$(this).removeAttr('title');
+			},
+			function(){
+				$(this).attr('title', ttext);
+			});
+
+			// prevents footer collapse animation on viewports when the
+			// collapse element is already forced open
+			$('footer [data-toggle="collapse"]').on('click', function(e){
+				if ($('footer .collapse:not(.in)').is(':visible')) {
+					e.preventDefault();
+					e.stopPropagation();
+				} else {
+					return true;
+				}
+			});
+
+		});
+	</script>
+	
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<!-- Magnific Popup core JS file -->
+	<script src="js/jquery.magnific-popup.js"></script>
+
+</head>
+<body>
+	<header id="header">
+		<div class="header-main">			
+			<div class="header-weather">
+				<a href="https://weather.com/weather/tenday/l/Cabo+San+Lucas+Mexico+MXBS0135:1:MX" target="_blank" title="Checa el clima en La Casa Grande"><i class="im im-sun"></i><span>Clima</span></a>
+			</div>
+			<div class="header-logo">
+				<a href="/" title="La Casa Grande">
+					<img src="images/main-logo.png" >
+				</a>
+			</div>
+			<div class="navbar-translate-header">
+				<div class="translate-header">
+					<a href="/restaurantes" title="La Casa Grande">
+						ES
+					</a>
+					<span>|</span>
+					<a href="/restaurants" title="La Casa Grande">
+						EN
+					</a>
+				</a>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="burger-bar"></span>
+					</button>
+				</div>
+			</div>
+			
+			<nav class="navbar" id="main-nav" role="navigation">			
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/" title="La Casa Grande">Inicio</a></li>
+						<li><a href="/historia" title="Checa nuestra Historia en La Casa Grande">Historia</a></li>
+						<li class="dropdown">
+							<a href="/restaurantes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Checa los Restaurantes en La Casa Grande">Qué Hacer</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="/restaurantes" title="Checa los Restaurantes en La Casa Grande">Restaurantes</a></li>
+								<li><a href="/compras" title="Mira las tiendas cerca de La Casa Grande">Compras</a></li>
+								<li><a href="/hoteles" title="Registrate en uno de los Hoteles en La Casa Grande">Hoteles</a></li>
+								<li><a href="/entretenimiento" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Entretenimiento</a></li>
+								<li><a href="/calendario" title="Mira todo nuestros Eventos en la Casa Grande">Calendario de Eventos</a></li>		
+							</ul>
+						</li>
+						<li><a href="/estacionamiento" title="Mira nuestros Estacionamiento">Estacionamiento</a></li>
+						<li><a id="Ctc_Btn" title="contactanos cuando lo deses aqui en La Casa Grande">Contacto</a></li>
+						<li><a href="/calendario" title="Checa Nuestras Promociones aqui en La Casa Grande">Promociones</a></li>
+					</ul>
+					<!-- The Modal -->
+					<div id="Contact_Modal" class="modal">
+					 	<!-- Modal content -->
+					  	<div class="modal-content">
+						    <div class="modal-header">
+							    <span class="ctc_close">X</span>
+						    </div>
+						    <div class="modal-body">
+						    	<div class="img-container">
+						    		<img src="images/pop_up/foto_contactanos.jpg" >
+						    	</div>
+						      	<div class="txt-container">
+						      		<div class="img-box">
+						      			<img src="images/pop_up/La_Calle_Grande_Logo_Cafe.png" >
+						      		</div>
+						      		<div class="dealer-phone">
+						      			<h4>Reservaciones (624) xxx xxxx</h4>
+						      		</div>
+						      		<form id="contact-form" method="post" action="contact-us.php" role="form">
+				                        <div class="messages"></div>
+
+				                        <div class="controls">
+
+				                            <div class="form-row">
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Nombre" required="required" data-error="Firstname is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Apellidos" required="required" data-error="Lastname is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            <div class="form-row">
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Correo *" required="required" data-error="Valid email is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Telefono">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            <div >
+				                                <div>
+				                                    <div class="form-group">
+				                                        <textarea id="form_message" name="message" class="form-control" placeholder="Mensaje*" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                       <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <input type="submit" class="btn-style btn-success btn-send" value="Enviar">
+				                                </div>
+				                            </div>                            
+				                        </div>
+
+				                    </form>
+						      	</div>
+						    </div>								    
+					  	</div>
+					</div>
+				</div>
+			</nav>
+		</div>		
+	</header>
+	<div class="side-tab-fixed">
+		<ul class="social-block">
+			<li>
+				<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+					<i class="fab fa-facebook-f" aria-hidden="true"></i>
+				</a>
+			</li>						
+			<li>
+				<a href="/" class="social-instagram" title="La Casa Grande en Instagram">
+					<i class="fab fa-instagram" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<main class="dinner-container">
+		<div class="top-dinner-index">
+			<img src="images/index/calle-grande-curve.png" >
+			<h2>Restaurantes <br> y Bares</h2>			
+		</div>
+		<div class="main-container">
+			<div class="dinner-welcome">
+				<div>
+					<div class="img-container">
+						<img src="images/dinner/icono_restaurant.png" >
+					</div>
+					<div class="txt-container">					
+						<h4>Disfruta de unas horas de placer, acompañadas de una buena experiencia gastronómica</h4>	
+						<p>Siendo un lugar con máxima tranquilidad, cada uno de sus restaurantes cuenta con diversos detalles que hacen la diferencia entre lo común y lo sofisticado; es por ello que La Calle Grande destaca por tener una variedad de restaurantes, para todos los gustos y necesidades. </p>
+						<p>Con los mejores escenarios del buen vivir que transportan a disfrutar por completo unas horas de placer, acompañadas del riquísimo sabor de todos y cada uno de los platillos.</p>		
+					</div>	
+				</div>
+			</div>	
+
+			<div class="special-food-container">
+				<div>
+					<div class="top-food-container">
+						<ul>
+							<li><div class="img-box"><img src="images/dinner/tabla_quesos.png" ></div></li>
+							<li><div class="img-box"><img src="images/dinner/cafe.png" ></div></li>
+							<li><div class="img-box"><img src="images/dinner/Tabla_corte.png" ></div></li>
+						</ul>
+						<h4>Una aventura culinaria emocionante. </h4>
+					</div>
+					<div class="bot-food-container">
+						<ul>
+							<li><div class="img-box"><img src="images/dinner/platillo1.png" ></div></li>
+							<li><div class="img-box"></div><img src="images/dinner/pan.png" ></li>
+							<li><div class="img-box"></div><img src="images/dinner/coctel.png" ></li>
+						</ul>
+						<h4>Delicias gastronómicas con un estilo particular.</h4>
+					</div>
+				</div>				
+			</div>
+
+			<div class="restaurants-container">
+				<div>
+					<div class="control-locals-container">
+						<h2>Restaurantes</h2>
+						<div class="locals-container" id="localaccordion">
+							<div class="dinner-local">
+								<div class="img-container">
+									<div class="img-box"><img src="images/dinner/cafe_dona_nena.png" ></div>
+								</div>
+								
+								<div class="txt-container">
+									<div class="img-box"><img src="images/dinner/Logo_Dona_Nena.png" ></div>
+									<p>Somos una barra de café de especialidad. Nuestros granos son de origen mexicano y son tostados semanalmente para tenerlos siempre frescos. Estamos ubicados en Plaza Don Carlos en el centro de San José del Cabo; una plaza restaurada de los años 1800s. Ven a visitarnos y tomate un delicioso café en nuestra terraza acompañado de un rico postre y muchas sonrisas.</p>
+									<p>Mijares #32 local 01, San José del Cabo, B.C.S. 23400</p>
+									<p>Teléfono: (624) 130 7487</p>
+									<div class="link-container">
+										<a href="pdf/CDN_MENU.pdf" title="Menu de Dona Nena">Menu</a>
+										<a href="mailto:cafenena11@gmail.com" title="Contacta a Dona Nena">Reservar</a>
+										<a href="http://www.cafenena.com/?fbclid=IwAR2yBLAIJCSEEaScouDeLU_6Z-jA8bt0pwG_alXWIz61XDGgfDa5tjHnGUA" title="Sitio web de Dona Nena">Sitio Web</a>
+										<a id="open-popup-1" title="Galeria de Dona Nena">Galeria</a>
+									</div>
+									<ul class="social-block">
+										<li>
+											<a href="https://www.facebook.com/cafedonanena" target="_blank" class="social-facebook" title="Dona Nena en Facebook">
+												<i class="fab fa-facebook-f" aria-hidden="true"></i>
+											</a>
+										</li>						
+										<li>
+											<a href="https://www.instagram.com/cafedonanena/?hl=en" target="_blank" class="social-instagram" title="Dona Nena en Instagram">
+												<i class="fab fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="dinner-local">
+								<div class="img-container">
+									<div class="img-box"><img src="images/dinner/la_panaderia.png" ></div>
+								</div>
+								
+								<div class="txt-container">
+									<div class="img-box"><img src="images/dinner/logo_la_panaderia.png" ></div>
+									<p>Horneamos pan dulce todos los días utilizando técnicas francesas e ingredientes mexicanos. Complementamos nuestro pan dulce con un menu de desayuno inspirado en el sabor casero y con los mejores ingredientes locales. Te esperamos!</p>
+									<p>Mijares #32 local 03, San José del Cabo, B.C.S. 23400</p>
+									<p>Teléfono: (624) 172 6016</p>
+									<div class="link-container">
+										<a href="pdf/menu-lapanaderia-sept.pdf" title="Menu de La Panaderia">Menu</a>
+										<a href="mailto:lapanaderiasjd@gmail.com" title="Contacta a La Panaderia">Reservar</a>
+										<a href="http://lapanaderiasjd.com/" title="Sitio web de La Panaderia">Sitio Web</a>
+										<a id="open-popup-2" title="Galeria de La Panaderia">Galeria</a>
+									</div>
+									<ul class="social-block">
+										<li>
+											<a href="https://www.facebook.com/lapanaderiasjd" target="_blank" class="social-facebook" title="La Panaderia en Facebook">
+												<i class="fab fa-facebook-f" aria-hidden="true"></i>
+											</a>
+										</li>						
+										<li>
+											<a href="https://www.instagram.com/lapanaderiasjd/" target="_blank" class="social-instagram" title="La Panaderia en Instagram">
+												<i class="fab fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="dinner-local">
+								<div class="img-container">
+									<div class="img-box"><img src="images/dinner/Mono.png" ></div>
+								</div>
+								
+								<div class="txt-container">
+									<div class="img-box"><img src="images/dinner/logo_mono.png" ></div>
+									<p>Somos un restaurante de comida rápida-casual con un menu corto y sin pretenciones pero con el mejor sabor y los ingredientes más frescos. Ven por una deliciosa hamburguesa y una cerveza bien fria!</p>
+									<p>Mijares #32 local 03, San José del Cabo, B.C.S. 23400</p>
+									<p>Teléfono: (624) 172 6016</p>
+									<div class="link-container">
+										<a href="pdf/menu-mono-sept.pdf" target="_blank" title="Menu de Mono">Menu</a>
+										<a href="mailto:lapanaderiasjd@gmail.com" title="Contacta a Mono">Reservar</a>
+										<a href="http://lapanaderiasjd.com/" title="Sitio web de Mono">Sitio Web</a>
+										<a id="open-popup-3" title="Galeria de Mono">Galeria</a>
+									</div>
+									<ul class="social-block">
+										<li>
+											<a href="https://www.facebook.com/monosnackbar" target="_blank" class="social-facebook" title="Mono en Facebook">
+												<i class="fab fa-facebook-f" aria-hidden="true"></i>
+											</a>
+										</li>						
+										<li>
+											<a href="https://www.instagram.com/cafedonanena/?hl=en" target="_blank" class="social-instagram" title="Mono en Instagram">
+												<i class="fab fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="dinner-local">
+								<div class="img-container">
+									<div class="img-box"><img src="images/dinner/Casa_Don_Rodrigo.png" ></div>
+								</div>
+								
+								<div class="txt-container">
+									<div class="img-box"><img src="images/dinner/logo_Casa_Don_Rodrigo.png" ></div>
+									<p>Casa Don Rodrigo es una casona cuya especialidad es hacer deliciosos quesos caseros y por eso ofrecen una experiencia única de degustación, donde los huéspedes son invitados a la bodega para probar tres de sus mejores quesos combinado con su elección de vino mexicano, tequila o mezcal…  ¡es una experiencia que no te puedes perder!</p>
+									<p>Mijares #29, Calle Grande, Centro San José del Cabo, México, 23400. Teléfono (624) 142-0418</p>
+									<p>Abierto de 4 p.m. a 11 p.m., de lunes a sábado.</p>
+									<div class="link-container">
+										<a href="pdf/Dinner.pdf" title="Menu de Casa Don Rodrigo">Menu</a>
+										<a href="https://www.opentable.com.mx/restref/client/?restref=1034446&lang=en-US&corrid=df0c702e-6a9b-47b0-944e-a36f9e87cf1a" title="Contacta a Casa Don Rodrigo">Reservar</a>
+										<a href="https://www.casadonrodrigo.com/" title="Sitio web de Casa Don Rodrigo">Sitio Web</a>
+										<a id="open-popup-4" title="Galeria de Casa Don Rodrigo">Galeria</a>
+									</div>
+									<ul class="social-block">
+										<li>
+											<a href="https://www.facebook.com/CasaDonRodrigo/" target="_blank" class="social-facebook" title="Dona Nena en Facebook">
+												<i class="fab fa-facebook-f" aria-hidden="true"></i>
+											</a>
+										</li>						
+										<li>
+											<a href="https://www.instagram.com/cafedonanena/?hl=en" target="_blank" class="social-instagram" title="La Casa Grande en Instagram">
+												<i class="fab fa-instagram" aria-hidden="true"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<a class="locals-collapse collapsed" data-toggle="collapse" data-parent="#localaccordion" href="#local_collapse">
+								<span>Ver Mas</span><i class="fa fa-angle-down"></i></i>
+							</a>
+							<div id="local_collapse" class="collapse-container collapse in">
+							  	<div class="dinner-local">
+									<div class="img-container">
+										<div class="img-box"><img src="images/dinner/Yumana.png" ></div>
+									</div>
+									
+									<div class="txt-container">
+										<div class="img-box"><img src="images/dinner/logo_Yumana.png" ></div>
+										<p>Yumana Kitchen tiene como objetivo ofrecer un nuevo alcance cuando se trata de "comida para el alma" y "comida reconfortante"; abrazando las nociones culturales del milenario grupo indígena: Los Yumanos. Nuestra cocina está destinada a todos; para la comunidad. Amamos nuestro hogar; es la riqueza natural y la rusticidad de vivir a lo largo de "toda California". Por eso trabajamos mayoritariamente con ingredientes locales de la más alta calidad.</p>
+										<p>Blvd. Antonio Mijares #10 Col. Centro San José del Cabo, B.C.S. 23400</p>
+										<p>Teléfono: (624) 175 8622</p>
+										<div class="link-container">
+											<a href="https://drive.google.com/file/d/1oRTY8O5kdvGu_8sUznwY2emTaULMAWtt/view" target="_blank" title="Menu de Yumana">Menu</a>
+											<a href="mailto:info@choyarose.com" title="Contacta a Yumana">Reservar</a>
+											<a href="https://rmonroy5.wixsite.com/yumanakitchen/" target="_blank" title="Sitio web de Yumana">Sitio Web</a>
+											<a id="open-popup-5" title="Galeria de Yumana">Galeria</a>
+										</div>
+										<ul class="social-block">
+											<li>
+												<a href="https://www.facebook.com/yumanakitchen" target="_blank" class="social-facebook" title="Yumana en Facebook">
+													<i class="fab fa-facebook-f" aria-hidden="true"></i>
+												</a>
+											</li>						
+											<li>
+												<a href="https://www.instagram.com/yumanakitchen/" target="_blank" class="social-instagram" title="Yumana en Instagram">
+													<i class="fab fa-instagram" aria-hidden="true"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="dinner-local">
+									<div class="img-container">
+										<div class="img-box"><img src="images/dinner/mollys_image.jpg" ></div>
+									</div>
+									
+									<div class="txt-container">
+										<div class="img-box"><img src="images/dinner/logo_Molys.png" ></div>
+										<p>Plaza Mijares, San José del Cabo, B.C.S. México</p>
+										<p>(624) 142 0744</p>
+										<p>Horario: 07:00 AM - 10:00 PM</p>
+										<div class="link-container">
+											<a href="pdf/menu.pdf" title="Menu de Molly's Sport Bar & Grill">Menu</a>
+										</div>
+										<ul class="social-block">
+											<li>
+												<a href="https://www.facebook.com/MollysSJD/" target="_blank" class="social-facebook" title="Molly's Sport Bar & Grill en Facebook">
+													<i class="fab fa-facebook-f" aria-hidden="true"></i>
+												</a>
+											</li>						
+											<li>
+												<a href="https://www.instagram.com/explore/locations/384205038/mollys-sport-bar-grill/" target="_blank" class="social-instagram" title="Molly's Sport Bar & Grill en Instagram">
+													<i class="fab fa-instagram" aria-hidden="true"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="dinner-local">
+									<div class="img-container">
+										<div class="img-box"><img src="images/dinner/Mi_Cocina.png" ></div>
+									</div>
+									
+									<div class="txt-container">
+										<div class="img-box"><img src="images/dinner/logo_Mi_Cocina.png" ></div>
+										<p>Mi Cocina Restaurant está ubicado en el lugar más hermoso del patio de Casa Natalia. Sirven durante toda la semana deliciosas combinaciones, entre la tradición de Baja California y el estilo europeo.  N chef mantiene la tradición en sus creaciones únicas de libaciones exquisitas y mariscos con ingredientes frescos, en su mayoría locales y orgánicos.</p>
+										<p>Teléfono: (624) 12 232 19</p>
+										<p>Horarios: 4:00pm – 10:00 pm  (Cerrado el Martes)</p>
+										<div class="link-container">
+											<a href="pdf/MENU_VERANO_2020.pdf" title="Menu de Mi Cocina">Menu</a>
+											<a href="https://www.opentable.com.mx/r/mi-cocina-at-casa-natalia-san-jose-del-cabo" title="Contacta a Mi Cocina">Reservar</a>
+											<a href="http://micocinasanjose.com/?fbclid=IwAR3rDkCiZUErQUJFyB7xx3mzbvA9xawWmRlaDN1QMKqkJ-2eleywKOXXq68" title="Sitio web de Mi Cocina">Sitio Web</a>
+											<a id="open-popup-6" title="Galeria de Mi Cocina">Galeria</a>
+										</div>
+										<ul class="social-block">
+											<li>
+												<a href="https://www.facebook.com/MiCocinaSanJoseDelCabo/" target="_blank" class="social-facebook" title="Mi Cocina en Facebook">
+													<i class="fab fa-facebook-f" aria-hidden="true"></i>
+												</a>
+											</li>						
+											<li>
+												<a href="https://www.instagram.com/micocina_cabo/" target="_blank" class="social-instagram" title="Mi Cocina en Instagram">
+													<i class="fab fa-instagram" aria-hidden="true"></i>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="social-index pages-social">
+				<div class="social-container">
+					<div class="txt-container">
+						<h2>Registrate</h2>
+						<h4>La Calle Grande <span>Newsletter</span></h4>
+						<p>Suscríbete a nuestro newsletter y recibe las noticias <br> más relevantes, así como acceso a ofertas exclusivas.</p>
+						<p>¡Suscríbete ya!</p>
+						<div class="form-container">
+							<form action="/simple_email.php">
+							  <input class="txt-input" type="text" id="email" name="email" value="Correo"><br>
+							  <input class="submit-input" type="submit" value="Enviar">
+							</form> 
+						</div>
+					</div>
+					<div class="img-container">						
+						<div class="link-container">
+							<div class="img-box">
+								<img src="images/index/Celular.png" >
+							</div>
+							<div class="static-img">
+								<img src="images/index/Foto_Circulo_News.png" >
+							</div>
+							<div class="img-mobile">
+								<img src="images/index/siguenos.png" >
+							</div>
+							<ul class="social-block">
+								<li>
+									<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+										<i class="fab fa-facebook-f" aria-hidden="true"></i>
+									</a>
+								</li>						
+								<li>
+									<a href="/" target="_blank" class="social-instagram" title="La Casa Grande en Instagram">
+										<i class="fab fa-instagram" aria-hidden="true"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+	
+	<footer id="footer">
+		<div class="main-footer">
+			<div class="footer-logo" id="accordion1">
+				<div class="logo-img">
+					<a href="/" title="La Casa Grande">
+						<img src="images/main-logo.png" >
+					</a>
+				</div>				
+				<a class="link-collapse" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+					<i class="fa fa-angle-down"></i></i>
+				</a>
+				<div id="collapse1" class="collapse-container collapse in">
+				  	<div class="footer-mail">
+				  		<h4>Correo</h4>
+				  		<span>info@lacallegrande.com.mx</span>
+				  	</div>
+				  	<div class="footer-map">
+				  		<h4>Dirección</h4>
+				  		<span>Blvd. Mijares, Centro Historico</span>
+				  		<span>San José del Cabo, B.C.S</span>
+				  	</div>
+				</div>
+				
+			</div>
+			<div class="footer-links" id="accordion">
+				<h4> Enlaces</h4>
+				<div class="link-collapse">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+						<i class="fa fa-angle-down"></i>
+					</a>
+				</div>				
+				<div id="collapse2" class="collapse-container collapse in">
+					<ul>
+						<li><a href="/historia" title="Checa nuestra Historia en La Casa Grande">Historia</a></li>
+						<li><a href="/restaurantes" title="Checa los Restaurantes en La Casa Grande">Restaurantes</a></li>
+						<li><a href="/compras" title="Mira las tiendas cerca de La Casa Grande">Compras</a></li>
+						<li><a href="/hoteles" title="Registrate en uno de los Hoteles en La Casa Grande">Hoteles</a></li>
+						<li><a href="/entretenimiento" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Entretenimiento</a></li>
+						<li><a href="/calendario" title="Mira todo nuestros Eventos en la Casa Grande">Calendario de Eventos</a></li>		
+						<li><a href="/estacionamiento" title="Mira nuestros Estacionamiento">Estacionamiento</a></li>		
+					</ul>
+				</div>
+			</div>
+			<div class="footer-contact">
+				<h4>Esperamos verte <span>pronto!</span></h4>
+				<a class="contact-link" id="Ftr_Ctc_Btn" title="contactanos cuando lo deses aqui en La Casa Grande"><span>Contactanos</span><i class="fa fa-angle-right"></i></a>
+				<div id="Ftr_Contact_Modal" class="modal">
+				 	<!-- Modal content -->
+				  	<div class="modal-content">
+					    <div class="modal-header">
+						    <span class="Ftr_ctc_close">X</span>
+					    </div>
+					    <div class="modal-body">
+					    	<div class="img-container">
+					    		<img src="images/pop_up/foto_contactanos.jpg" >
+					    	</div>
+					      	<div class="txt-container">
+					      		<div class="img-box">
+					      			<img src="images/pop_up/La_Calle_Grande_Logo_Cafe.png" >
+					      		</div>
+					      		<div class="dealer-phone">
+					      			<h4>Reservaciones (624) xxx xxxx</h4>
+					      		</div>
+					      		<form id="contact-form" method="post" action="contact-us.php" role="form">
+			                        <div class="messages"></div>
+
+			                        <div class="controls">
+
+			                            <div class="form-row">
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Nombre" required="required" data-error="Firstname is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Apellidos" required="required" data-error="Lastname is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div class="form-row">
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Correo *" required="required" data-error="Valid email is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Telefono">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div >
+			                                <div>
+			                                    <div class="form-group">
+			                                        <textarea id="form_message" name="message" class="form-control" placeholder="Mensaje*" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                   <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <input type="submit" class="btn-style btn-success btn-send" value="Enviar">
+			                                </div>
+			                            </div>                            
+			                        </div>
+
+			                    </form>
+					      	</div>
+					    </div>								    
+				  	</div>
+				</div>
+				<div class="footer-social">
+					<h4>Siguénos</h4>
+					<ul class="social-block">
+						<li>
+							<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+								<i class="fab fa-facebook-f" aria-hidden="true"></i>
+							</a>
+						</li>						
+						<li>
+							<a href="/" target="_blank" class="social-instagram" title="La Casa Grande en Instagram">
+								<i class="fab fa-instagram" aria-hidden="true"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+	<script type="text/javascript">
+		$('#open-popup-1').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/dinner/galerias/Dona_Nena/Nena_1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Dona_Nena/Nena_2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/dinner/galerias/Dona_Nena/Nena_3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Dona_Nena/Nena_4.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-2').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/dinner/galerias/La_Panaderia/Panaderia1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/La_Panaderia/Panaderia2.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/La_Panaderia/Panaderia3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/La_Panaderia/Panaderia4.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-3').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/dinner/galerias/Mono/Mono1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Mono/Mono2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/dinner/galerias/Mono/Mono3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Mono/Mono4.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-4').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/dinner/galerias/Casa_Don_Rodrigo/Rodrigo1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Casa_Don_Rodrigo/Rodrigo2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/dinner/galerias/Casa_Don_Rodrigo/Rodrigo3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Casa_Don_Rodrigo/Rodrigo4.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-5').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/dinner/galerias/Yumana/Yumana1.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/dinner/galerias/Yumana/Yumana2.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Yumana/Yumana3.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/dinner/galerias/Yumana/Yumana4.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Yumana/Yumana5.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Yumana/Yumana6.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-6').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/dinner/galerias/Mi_Cocina/Mi_Cocina1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Mi_Cocina/Mi_Cocina2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/dinner/galerias/Mi_Cocina/Mi_Cocina3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Mi_Cocina/Mi_Cocina4.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/dinner/galerias/Mi_Cocina/Mi_Cocina5.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+	</script>
+
+	<script>
+		// Get the modal
+		var modal = document.getElementById("Contact_Modal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("Ctc_Btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("ctc_close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
+	<script>
+		// Get the modal
+		var modal = document.getElementById("Ftr_Contact_Modal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("Ftr_Ctc_Btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("Ftr_ctc_close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js" integrity="sha256-dHf/YjH1A4tewEsKUSmNnV05DDbfGN3g7NMq86xgGh8=" crossorigin="anonymous"></script>
+	<script src="js/contact-us.js"></script>
+</body>
+</html>    

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>La Casa Grande - Entretenimiento</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="stylers.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+
+	<!-- F O N T S -->
+	<link href="fonts/css/all.css" rel="stylesheet"> <!--load all styles -->
+	<link href="fonts/css/iconmonstr-iconic-font.css" rel="stylesheet"> <!--load all styles -->
+	<link href="fonts/css/iconmonstr-iconic-font.css" rel="stylesheet"> <!--load all styles -->
+	<link href="./fonts/ivy.css" rel="stylesheet">
+	<link href="./fonts/ivy-italic.css" rel="stylesheet">
+	<link href="./fonts/acumin.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!--sS C R I P T S -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script
+	    src="https://code.jquery.com/jquery-3.3.1.js"
+	    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	    crossorigin="anonymous">
+	</script>
+	<script>
+		function isBreakpoint( alias ) {
+			return $('.device-' + alias).is(':visible');
+		}
+
+		$(document).ready(function(){
+			//beta aria-expanded fix 1/30/18
+			//toggles aria-expanded in mobile views using built-in bootstrap function
+			$(".dropdown").on("show.bs.dropdown", function(event){
+				$(this).find('.dropdown-toggle').attr('aria-expanded', 'true');
+			});
+			$(".dropdown").on("hide.bs.dropdown", function(event){
+				$(this).find('.dropdown-toggle').attr('aria-expanded', 'false');
+			});
+
+			if( isBreakpoint('md') || isBreakpoint('lg') || isBreakpoint('xl') ) {
+				//toggles aria-expanded in desktop views when we hack it to open on hover
+				$('.dropdown').hover(function() {
+					$(this).addClass('open');
+					$(this).find('.dropdown-toggle').attr('aria-expanded', 'true');
+				},
+				function() {
+					$(this).removeClass('open');
+					$(this).find('.dropdown-toggle').attr('aria-expanded', 'false');
+				});
+				$("[data-toggle='dropdown']").on("click", function(e){
+					if((e.which == "1") && $(this).is(":hover") && !$(this).parents(".dropdown").hasClass("open")){
+						e.stopImmediatePropagation();
+						if ($(this).attr('target') !== "_blank" ) {
+							document.location=$(this).attr("href");
+						}
+					}
+				});
+			}
+
+			// makes href="tel:#"s valid for browsers
+			$('a[href^="tel"]').each( function(){
+				$(this).attr('href', 'tel:' + $(this).attr('href').replace(/\D+/g,""));
+			});
+
+			// hide link titles on hover
+			var ttext;
+			$(".navbar-nav a").hover(function(){
+				ttext = $(this).attr('title');
+				$(this).removeAttr('title');
+			},
+			function(){
+				$(this).attr('title', ttext);
+			});
+
+			// prevents footer collapse animation on viewports when the
+			// collapse element is already forced open
+			$('footer [data-toggle="collapse"]').on('click', function(e){
+				if ($('footer .collapse:not(.in)').is(':visible')) {
+					e.preventDefault();
+					e.stopPropagation();
+				} else {
+					return true;
+				}
+			});
+
+		});
+	</script>
+	
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<!-- Magnific Popup core JS file -->
+	<script src="js/jquery.magnific-popup.js"></script>
+
+</head>
+<body>
+	<header id="header">
+		<div class="header-main">			
+			<div class="header-weather">
+				<a href="https://weather.com/weather/tenday/l/Cabo+San+Lucas+Mexico+MXBS0135:1:MX" target="_blank" title="Checa el clima en La Casa Grande"><i class="im im-sun"></i><span>Clima</span></a>
+			</div>
+			<div class="header-logo">
+				<a href="/" title="La Casa Grande">
+					<img src="images/main-logo.png" >
+				</a>
+			</div>
+			<div class="navbar-translate-header">
+				<div class="translate-header">
+					<a href="/compras" title="La Casa Grande">
+						ES
+					</a>
+					<span>|</span>
+					<a href="/shopping" title="La Casa Grande">
+						EN
+					</a>
+				</a>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="burger-bar"></span>
+					</button>
+				</div>
+			</div>
+			
+			<nav class="navbar" id="main-nav" role="navigation">			
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/" title="La Casa Grande">Inicio</a></li>
+						<li><a href="/historia" title="Checa nuestra Historia en La Casa Grande">Historia</a></li>
+						<li class="dropdown">
+							<a href="/restaurantes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Checa los Restaurantes en La Casa Grande">Qué Hacer</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="/restaurantes" title="Checa los Restaurantes en La Casa Grande">Restaurantes</a></li>
+								<li><a href="/compras" title="Mira las tiendas cerca de La Casa Grande">Compras</a></li>
+								<li><a href="/hoteles" title="Registrate en uno de los Hoteles en La Casa Grande">Hoteles</a></li>
+								<li><a href="/entretenimiento" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Entretenimiento</a></li>
+								<li><a href="/calendario" title="Mira todo nuestros Eventos en la Casa Grande">Calendario de Eventos</a></li>		
+							</ul>
+						</li>
+						<li><a href="/estacionamiento" title="Mira nuestros Estacionamiento">Estacionamiento</a></li>
+						<li><a id="Ctc_Btn" title="contactanos cuando lo deses aqui en La Casa Grande">Contacto</a></li>
+						<li><a href="/calendario" title="Checa Nuestras Promociones aqui en La Casa Grande">Promociones</a></li>
+					</ul>
+					<!-- The Modal -->
+					<div id="Contact_Modal" class="modal">
+					 	<!-- Modal content -->
+					  	<div class="modal-content">
+						    <div class="modal-header">
+							    <span class="ctc_close">X</span>
+						    </div>
+						    <div class="modal-body">
+						    	<div class="img-container">
+						    		<img src="images/pop_up/foto_contactanos.jpg" >
+						    	</div>
+						      	<div class="txt-container">
+						      		<div class="img-box">
+						      			<img src="images/pop_up/La_Calle_Grande_Logo_Cafe.png" >
+						      		</div>
+						      		<div class="dealer-phone">
+						      			<h4>Reservaciones (624) xxx xxxx</h4>
+						      		</div>
+						      		<form id="contact-form" method="post" action="contact-us.php" role="form">
+				                        <div class="messages"></div>
+
+				                        <div class="controls">
+
+				                            <div class="form-row">
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Nombre" required="required" data-error="Firstname is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Apellidos" required="required" data-error="Lastname is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            <div class="form-row">
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Correo *" required="required" data-error="Valid email is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Telefono">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            <div >
+				                                <div>
+				                                    <div class="form-group">
+				                                        <textarea id="form_message" name="message" class="form-control" placeholder="Mensaje*" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                       <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <input type="submit" class="btn-style btn-success btn-send" value="Enviar">
+				                                </div>
+				                            </div>                            
+				                        </div>
+
+				                    </form>
+						      	</div>
+						    </div>								    
+					  	</div>
+					</div>
+				</div>
+			</nav>
+		</div>		
+	</header>
+	<div class="side-tab-fixed">
+		<ul class="social-block">
+			<li>
+				<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+					<i class="fab fa-facebook-f" aria-hidden="true"></i>
+				</a>
+			</li>						
+			<li>
+				<a href="/" class="social-instagram" title="La Casa Grande en Instagram">
+					<i class="fab fa-instagram" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<main class="shop-container">
+		<div class="top-shop-index">
+			<img src="images/index/calle-grande-curve.png" >
+			<h2>Compras</h2>			
+		</div>
+		<div class="main-container">
+			<div class="shop-welcome">
+				<div>
+					<div class="img-container">
+						<div class="img-box first"><img src="images/shop/Icono_compras.png" ></div>
+						<div class="img-box second"><img src="images/shop/introduccion.png" ></div>
+					</div> 
+					<div class="txt-container">
+						<h4>Disfrute comprando en San José del Cabo</h4>
+						<p>La Calle Grande en San José del Cabo es un oasis mexicano culturalmente diverso en el extremo sur de la Península de Baja California, donde te esperan unas increíbles experiencias e incomparables oportunidades de compras dentro de sus tradicionales boutiques y joyerias de la mano de artistas mexicanos.</p>
+
+						<p>Tenemos una amplia variedad que abarcan todas las edades, ya que los gustos individuales se fusionan en un estilo sin precedentes aquí al final de la tierra.</p>
+
+						<p>Las boutiques se alinean en las calles laterales y van desde elegantes diseñadores, joyeros de clase mundial, hasta baratijas escondidas.</p>
+					</div>	
+				</div>
+			</div>
+			<div class="shop-slogan">
+				<div>
+					<span>Hoy, mientras caminas por La Calle Grande bordeada por edificios de estilo colonial, puedes sentir la rica historia que aún está presente en el aire mientras realizas tus compras.</span>
+				</div>
+			</div>
+			<div class="shop-locals">
+				<div>
+					<div id="shopSlider">
+						<ul class="slider__content">
+							<li class="slider__item">
+								<div class="slider__container">
+									<div class="choya-container">
+										<div class="txt-container">
+											<div class="img-box"><img src="images/shop/Choya_Rose.png" ></div>
+											<p>Boutique de diseño y estilo de vida donde encontrarás hermosos accesorios para el hogar, regalos y muebles hechos a medida de todas partes de México. Choya Rose también se especializa en diseño de interiores y servicios de adquisiciones.  </p>
+											<p>Mijares #29, Calle Grande, Centro San José del Cabo, México, 23400.Teléfono (624) 142-0418 Abierto de 4 p.m. a 11 p.m., de lunes a sábado.</p>
+											<div class="link-container">
+												<a href="mailto:info@choyarose.com" title="Contacta a Choya Rose">Contacto</a>
+												<a id="open-popup-2" title="Contacta a Choya Rose">Galeria</a>
+											</div>
+											<div class="social-container">
+												<ul class="social-block">
+													<li>
+														<a href="https://www.instagram.com/choyarose/" target="_blank" class="social-instagram" title="Choya Rose en Instagram">
+															<i class="fab fa-instagram" aria-hidden="true"></i>
+														</a>
+													</li>								
+												</ul>
+											</div>
+										</div>										
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div class="opalo-container">
+										<div class="txt-container">
+											<div class="img-box"><img src="images/shop/logo_Casa_Opalo.png" ></div>
+											<p>Empresa famliar, con experiencia en gemas preciosas y diseños únicos de joyería elaborada de forma artesanal plasmando su estilo en el cual destacan terminados rústicos utilizando metales preciosos, se distinguen las figuras de soles y eclipses, además de su colección marina con figuras alusivas a la fauna del mar.</p>
+											<p>Blvd. Mijares 34 Loc. 3, Col. Centro, San José del cabo B.C.S.</p>
+											<p>(624) 146 9442 / (624) 212 4473</p>		
+											<div class="link-container">
+												<a href="https://www.rogeliosanchezjewels.com/" target="_blank" title="Contacta a Choya Rose">Contacto</a>
+												<a id="open-popup-3" title="Contacta a Casa Opalo">Galeria</a>
+											</div>
+											<div class="social-container">
+												<ul class="social-block">
+													<li>
+														<a href="https://www.facebook.com/CasaDelOpaloRogelioSanchezDesigner/" target="_blank" class="social-facebook" title="Casa Opalo en Facebook">
+															<i class="fab fa-facebook-f" aria-hidden="true"></i>
+														</a>
+													</li>
+													<li>
+														<a href="https://www.instagram.com/rogelio_studio/" target="_blank" class="social-instagram" title="Casa Opalo en Instagram">
+															<i class="fab fa-instagram" aria-hidden="true"></i>
+														</a>
+													</li>								
+												</ul>
+											</div>
+										</div>										
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div class="eduardo-container">
+										<div class="txt-container">
+											<div class="img-box"><img src="images/shop/logo_Eduardo_Sanchez.png" ></div>
+											<p>Fundada en 2008 ESJ se ha dedicado a la “Perfección del arte del diseño y creación de joyas de lujo y contemporáneas. Cada pieza está diseñada y hecha a mano en nuestro taller en San José del Cabo. Creamos experiencias únicas para nuestros clientes, motívalos a probar un estilo diferente y exclusivo a través de diseños elegantes, creativos y versátiles .</p>
+											<p>Blvd. Mijares #10 Colonia Centro, San José del Cabo, B.C.S.</p>
+											<p>(624) 105 2313</p>
+											<div class="link-container">
+												<a href="http://www.eduardosanchez.com.mx/" target="_blank" title="Contacta a Choya Rose">Contacto</a>
+												<a id="open-popup-4" title="Contacta a Eduardo_Sanchez">Galeria</a>
+											</div>
+											<div class="social-container">
+												<ul class="social-block">
+													<li>
+														<a href="https://www.facebook.com/Eduardosanchezjewelry/" target="_blank" class="social-facebook" title="Eduardo_Sanchez en Facebook">
+															<i class="fab fa-facebook-f" aria-hidden="true"></i>
+														</a>
+													</li>			
+													<li>
+														<a href="https://www.instagram.com/eduardosanchezjewelry/" target="_blank" class="social-instagram" title="Eduardo_Sanchez en Instagram">
+															<i class="fab fa-instagram" aria-hidden="true"></i>
+														</a>
+													</li>					
+												</ul>
+											</div>
+										</div>										
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div class="indira-container">
+										<div class="txt-container">
+											<div class="img-box"><img src="images/shop/Indira&Isidro.png" ></div>
+											<p>Los diseñadores de joyería de Indira e Isidro crean y fabrican joyas únicas que están lejos de ser tradicionales. Estas piezas son especiales y dignas de mención ya que son diferentes a otras que encontrarás.</p>
+											<p>Miguel Hidalgo #1, Centro, San José del Cabo, B.C.S.</p>
+											<p>(624) 146 9228</p>
+											<div class="link-container">
+												<a href="/" title="Contacta a Indira &amp; Isidro">Contacto</a>
+												<a id="open-popup-5" title="Contacta a Indira &amp; Isidro">Galeria</a>
+											</div>
+											<div class="social-container">
+												<ul class="social-block">
+													<li>
+														<a href="https://www.facebook.com/INDIRANDISIDRO" target="_blank" class="social-facebook" title="Indira &amp; Isidro en Facebook">
+															<i class="fab fa-facebook-f" aria-hidden="true"></i>
+														</a>
+													</li>		
+													<li>
+														<a href="https://www.instagram.com/explore/locations/125273930830855/indira-isidro-jewelry-designers/" target="_blank" class="social-instagram" title="Indira &amp; Isidro en Instagram">
+															<i class="fab fa-instagram" aria-hidden="true"></i>
+														</a>
+													</li>							
+												</ul>
+											</div>
+										</div>										
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div class="maya-container">
+										<div class="txt-container">
+											<div class="img-box"><img src="images/shop/Logo_Taller_maya.png" ></div>
+											<p>Taller Maya es una marca colectiva de diseño mexicano conformada por un equipo creativo multidisciplinario que colabora con empresas sociales artesanales establecidas en la Península de Yucatán, trabajando por el impulso y desarrollo de la cultura maya viva.</p>
+											<p>Mijares # 32 Local #2 Plaza Don Carlos, Centro, San José del Cabo, B.C.S.</p>
+											<p>(624) 122 5929 </p>
+											<div class="link-container">
+												<a id="open-popup-1" title="Contacta a Taller Maya">Galeria</a>
+											</div>
+											<div class="social-container">
+												<ul class="social-block">
+													<li>
+														<a href="https://www.facebook.com/TallerMayaArtesania/" target="_blank" class="social-facebook" title="Taller Maya en Facebook">
+															<i class="fab fa-facebook-f" aria-hidden="true"></i>
+														</a>
+													</li>	
+													<li>
+														<a href="https://www.instagram.com/tallermaya/" target="_blank" class="social-instagram" title="Indira &amp; Isidro en Instagram">
+															<i class="fab fa-instagram" aria-hidden="true"></i>
+														</a>
+													</li>								
+												</ul>
+											</div>
+										</div>										
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="carousel-nav">
+							<a class="left carousel-control">
+								<i class="fa fa-chevron-left" aria-hidden="true"></i>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="right carousel-control">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="shop-about-container">
+				<div>
+					<div class="about-container">
+						<div class="first-txt">
+							<h4>Tiendas enfocadas al arte local y regional.</h4>
+							<p>Ofrecemos una variedad distinta de productos y cada una ofrece un ambiente único y un entorno de compras exótico.</p>
+						</div>
+						<div class="img-container">
+							<div class="img-box">
+								<img src="images/shop/tiendas2.jpg" >
+								<img class="img-abs"src="images/shop/TexturaT.png" >
+							</div>
+						</div>
+						<div class="second-txt">
+							<h4>El entretenimiento, las compras y la vida tranquila se combinan.</h4>						
+						</div>
+						<div class="last-txt">
+							<p>Si está comprando ropa, souvenirs, joyas, artículos tradicionales así como artesanías, nada mejor que un paseo por La Calle Grande que conduce al centro de la ciudad.</p>
+							<p>Entre las boutiques y tiendas por las que pasará, también hay restaurantes, cafeterías y bares.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="social-index pages-social">
+				<div class="social-container">
+					<div class="txt-container">
+						<h2>Registrate</h2>
+						<h4>La Calle Grande <span>Newsletter</span></h4>
+						<p>Suscríbete a nuestro newsletter y recibe las noticias <br> más relevantes, así como acceso a ofertas exclusivas.</p>
+						<p>¡Suscríbete ya!</p>
+						<div class="form-container">
+							<form action="/simple_email.php">
+							  <input class="txt-input" type="text" id="email" name="email" value="Correo"><br>
+							  <input class="submit-input" type="submit" value="Enviar">
+							</form> 
+						</div>
+					</div>
+					<div class="img-container">						
+						<div class="link-container">
+							<div class="img-box">
+								<img src="images/index/Celular.png" >
+							</div>
+							<div class="static-img">
+								<img src="images/index/Foto_Circulo_News.png" >
+							</div>
+							<div class="img-mobile">
+								<img src="images/index/siguenos.png" >
+							</div>
+							<ul class="social-block">
+								<li>
+									<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+										<i class="fab fa-facebook-f" aria-hidden="true"></i>
+									</a>
+								</li>						
+								<li>
+									<a href="/" target="_blank" class="social-instagram" title="La Casa Grande en Instagram">
+										<i class="fab fa-instagram" aria-hidden="true"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+	<footer id="footer">
+		<div class="main-footer">
+			<div class="footer-logo" id="accordion1">
+				<div class="logo-img">
+					<a href="/" title="La Casa Grande">
+						<img src="images/main-logo.png" >
+					</a>
+				</div>				
+				<a class="link-collapse" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+					<i class="fa fa-angle-down"></i></i>
+				</a>
+				<div id="collapse1" class="collapse-container collapse in">
+				  	<div class="footer-mail">
+				  		<h4>Correo</h4>
+				  		<span>info@lacallegrande.com.mx</span>
+				  	</div>
+				  	<div class="footer-map">
+				  		<h4>Dirección</h4>
+				  		<span>Blvd. Mijares, Centro Historico</span>
+				  		<span>San José del Cabo, B.C.S</span>
+				  	</div>
+				</div>
+				
+			</div>
+			<div class="footer-links" id="accordion">
+				<h4> Enlaces</h4>
+				<div class="link-collapse">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+						<i class="fa fa-angle-down"></i>
+					</a>
+				</div>				
+				<div id="collapse2" class="collapse-container collapse in">
+					<ul>
+						<li><a href="/historia" title="Checa nuestra Historia en La Casa Grande">Historia</a></li>
+						<li><a href="/restaurantes" title="Checa los Restaurantes en La Casa Grande">Restaurantes</a></li>
+						<li><a href="/compras" title="Mira las tiendas cerca de La Casa Grande">Compras</a></li>
+						<li><a href="/hoteles" title="Registrate en uno de los Hoteles en La Casa Grande">Hoteles</a></li>
+						<li><a href="/entretenimiento" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Entretenimiento</a></li>
+						<li><a href="/calendario" title="Mira todo nuestros Eventos en la Casa Grande">Calendario de Eventos</a></li>		
+						<li><a href="/estacionamiento" title="Mira nuestros Estacionamiento">Estacionamiento</a></li>		
+					</ul>
+				</div>
+			</div>
+			<div class="footer-contact">
+				<h4>Esperamos verte <span>pronto!</span></h4>
+				<a class="contact-link" id="Ftr_Ctc_Btn" title="contactanos cuando lo deses aqui en La Casa Grande"><span>Contactanos</span><i class="fa fa-angle-right"></i></a>
+				<div id="Ftr_Contact_Modal" class="modal">
+				 	<!-- Modal content -->
+				  	<div class="modal-content">
+					    <div class="modal-header">
+						    <span class="Ftr_ctc_close">X</span>
+					    </div>
+					    <div class="modal-body">
+					    	<div class="img-container">
+					    		<img src="images/pop_up/foto_contactanos.jpg" >
+					    	</div>
+					      	<div class="txt-container">
+					      		<div class="img-box">
+					      			<img src="images/pop_up/La_Calle_Grande_Logo_Cafe.png" >
+					      		</div>
+					      		<div class="dealer-phone">
+					      			<h4>Reservaciones (624) xxx xxxx</h4>
+					      		</div>
+					      		<form id="contact-form" method="post" action="contact-us.php" role="form">
+			                        <div class="messages"></div>
+
+			                        <div class="controls">
+
+			                            <div class="form-row">
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Nombre" required="required" data-error="Firstname is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Apellidos" required="required" data-error="Lastname is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div class="form-row">
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Correo *" required="required" data-error="Valid email is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Telefono">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div >
+			                                <div>
+			                                    <div class="form-group">
+			                                        <textarea id="form_message" name="message" class="form-control" placeholder="Mensaje*" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                   <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <input type="submit" class="btn-style btn-success btn-send" value="Enviar">
+			                                </div>
+			                            </div>                            
+			                        </div>
+
+			                    </form>
+					      	</div>
+					    </div>								    
+				  	</div>
+				</div>
+				<div class="footer-social">
+					<h4>Siguénos</h4>
+					<ul class="social-block">
+						<li>
+							<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+								<i class="fab fa-facebook-f" aria-hidden="true"></i>
+							</a>
+						</li>						
+						<li>
+							<a href="/" target="_blank" class="social-instagram" title="La Casa Grande en Instagram">
+								<i class="fab fa-instagram" aria-hidden="true"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>	
+	<script src="js/multislider.js"></script>
+	<script>
+		$('#shopSlider').multislider({
+			continuous: false,
+			duration: 2500
+		});		
+	</script> 
+	<script type="text/javascript">
+		$('#open-popup-1').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/shop/galerias/Taller_maya/Maya1.png',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Taller_maya/Maya2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/shop/galerias/Taller_maya/Maya3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Taller_maya/Maya4.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-2').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/shop/galerias/Choya_Rose/choya1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Choya_Rose/choya2.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-3').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/shop/galerias/Casa_Opalo/Opalo1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Casa_Opalo/Opalo2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/shop/galerias/Casa_Opalo/Opalo3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Casa_Opalo/Opalo4.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Casa_Opalo/Opalo5.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-4').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/shop/galerias/Eduardo_Sanchez/Sanchez1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Eduardo_Sanchez/Sanchez2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/shop/galerias/Eduardo_Sanchez/Sanchez3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Eduardo_Sanchez/Sanchez4.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+		$('#open-popup-5').magnificPopup({
+		    items: [
+		      {
+		        src: 'images/shop/galerias/Indira&Isidro/Indira1.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Indira&Isidro/Indira2.jpg',
+		        title: 'Galeria 1'
+		      },
+		      {
+		        src: 'images/shop/galerias/Indira&Isidro/Indira3.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Indira&Isidro/Indira4.jpg',
+		        title: 'Galeria 1'
+		      },
+		     {
+		        src: 'images/shop/galerias/Indira&Isidro/Indira5.jpg',
+		        title: 'Galeria 1'
+		      }
+		    ],
+		    gallery: {
+		      enabled: true
+		    },
+		    type: 'image' // this is a default type
+		});
+	</script>
+	<script>
+		// Get the modal
+		var modal = document.getElementById("Contact_Modal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("Ctc_Btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("ctc_close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
+	<script>
+		// Get the modal
+		var modal = document.getElementById("Ftr_Contact_Modal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("Ftr_Ctc_Btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("Ftr_ctc_close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js" integrity="sha256-dHf/YjH1A4tewEsKUSmNnV05DDbfGN3g7NMq86xgGh8=" crossorigin="anonymous"></script>
+	<script src="js/contact-us.js"></script>
+</body>
+</html>    

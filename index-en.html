@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>La Casa Grande</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="stylers.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+
+	<!-- F O N T S -->
+	<link href="fonts/css/all.css" rel="stylesheet"> <!--load all styles -->
+	<link href="fonts/css/iconmonstr-iconic-font.css" rel="stylesheet"> <!--load all styles -->
+	<link href="fonts/css/iconmonstr-iconic-font.css" rel="stylesheet"> <!--load all styles -->
+	<link href="./fonts/ivy.css" rel="stylesheet">
+	<link href="./fonts/ivy-italic.css" rel="stylesheet">
+	<link href="./fonts/acumin.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<!--sS C R I P T S -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script
+	    src="https://code.jquery.com/jquery-3.3.1.js"
+	    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	    crossorigin="anonymous">
+	</script>
+	<script>
+		function isBreakpoint( alias ) {
+			return $('.device-' + alias).is(':visible');
+		}
+
+		$(document).ready(function(){
+			//beta aria-expanded fix 1/30/18
+			//toggles aria-expanded in mobile views using built-in bootstrap function
+			$(".dropdown").on("show.bs.dropdown", function(event){
+				$(this).find('.dropdown-toggle').attr('aria-expanded', 'true');
+			});
+			$(".dropdown").on("hide.bs.dropdown", function(event){
+				$(this).find('.dropdown-toggle').attr('aria-expanded', 'false');
+			});
+
+			if( isBreakpoint('md') || isBreakpoint('lg') || isBreakpoint('xl') ) {
+				//toggles aria-expanded in desktop views when we hack it to open on hover
+				$('.dropdown').hover(function() {
+					$(this).addClass('open');
+					$(this).find('.dropdown-toggle').attr('aria-expanded', 'true');
+				},
+				function() {
+					$(this).removeClass('open');
+					$(this).find('.dropdown-toggle').attr('aria-expanded', 'false');
+				});
+				$("[data-toggle='dropdown']").on("click", function(e){
+					if((e.which == "1") && $(this).is(":hover") && !$(this).parents(".dropdown").hasClass("open")){
+						e.stopImmediatePropagation();
+						if ($(this).attr('target') !== "_blank" ) {
+							document.location=$(this).attr("href");
+						}
+					}
+				});
+			}
+
+			// makes href="tel:#"s valid for browsers
+			$('a[href^="tel"]').each( function(){
+				$(this).attr('href', 'tel:' + $(this).attr('href').replace(/\D+/g,""));
+			});
+
+			// hide link titles on hover
+			var ttext;
+			$(".navbar-nav a").hover(function(){
+				ttext = $(this).attr('title');
+				$(this).removeAttr('title');
+			},
+			function(){
+				$(this).attr('title', ttext);
+			});
+
+			// prevents footer collapse animation on viewports when the
+			// collapse element is already forced open
+			$('footer [data-toggle="collapse"]').on('click', function(e){
+				if ($('footer .collapse:not(.in)').is(':visible')) {
+					e.preventDefault();
+					e.stopPropagation();
+				} else {
+					return true;
+				}
+			});
+
+		});
+	</script>
+
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- jQuery 1.7.2+ or Zepto.js 1.0+ -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<!-- Magnific Popup core JS file -->
+	<script src="js/jquery.magnific-popup.js"></script>
+
+</head>
+<body>
+	<header id="header">
+		<div class="header-main">			
+			<div class="header-weather">
+				<a href="https://weather.com/weather/tenday/l/Cabo+San+Lucas+Mexico+MXBS0135:1:MX" target="_blank" title="Checa el clima en La Casa Grande"><i class="im im-sun"></i><span>Weather</span></a>
+			</div>
+			<div class="header-logo">
+				<a href="/index-en" title="La Casa Grande">
+					<img src="images/main-logo.png" >
+				</a>
+			</div>
+			<div class="navbar-translate-header">
+				<div class="translate-header">
+					<a href="/" title="La Casa Grande">
+						ES
+					</a>
+					<span>|</span>
+					<a href="/index-en" title="La Casa Grande">
+						EN
+					</a>
+				</a>
+				</div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="burger-bar"></span>
+					</button>
+				</div>
+			</div>
+			
+			<nav class="navbar" id="main-nav" role="navigation">			
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav nav-en">
+						<li><a href="/index-en" title="La Casa Grande">Home</a></li>
+						<li><a href="/history" title="Check our history on La Casa Grande">History</a></li>
+						<li class="dropdown">
+							<a href="/restaurants" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Checa los Restaurantes en La Casa Grande">What to do</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="/restaurants" title="Checa los Restaurantes en La Casa Grande">Restaurants</a></li>
+								<li><a href="/shopping" title="Mira las tiendas cerca de La Casa Grande">Shopping</a></li>
+								<li><a href="/hotels" title="Registrate en uno de los Hoteles en La Casa Grande">Hotels</a></li>
+								<li><a href="/entertainment" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Entertainment</a></li>
+								<li><a href="/events" title="Mira todo nuestros Eventos en la Casa Grande">Events Calendar</a></li>		
+							</ul>
+						</li>
+						<li><a href="/parking" title="Mira nuestros Estacionamiento">Parking</a></li>
+						<li><a id="Ctc_Btn" title="contactanos cuando lo deses aqui en La Casa Grande">Contact</a></li>
+						<li><a href="/events" title="Checa Nuestras Promociones aqui en La Casa Grande">Promotions</a></li>
+					</ul>
+					<!-- The Modal -->
+					<div id="Contact_Modal" class="modal">
+					 	<!-- Modal content -->
+					  	<div class="modal-content">
+						    <div class="modal-header">
+							    <span class="ctc_close">X</span>
+						    </div>
+						    <div class="modal-body">
+						    	<div class="img-container">
+						    		<img src="images/pop_up/foto_contactanos.jpg" >
+						    	</div>
+						      	<div class="txt-container">
+						      		<div class="img-box">
+						      			<img src="images/pop_up/La_Calle_Grande_Logo_Cafe.png" >
+						      		</div>
+						      		<div class="dealer-phone">
+						      			<h4>Reservations (624) xxx xxxx</h4>
+						      		</div>
+						      		<form id="contact-form" method="post" action="contact-us.php" role="form">
+				                        <div class="messages"></div>
+
+				                        <div class="controls">
+
+				                            <div class="form-row">
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Nombre" required="required" data-error="Firstname is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Apellidos" required="required" data-error="Lastname is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            <div class="form-row">
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Correo *" required="required" data-error="Valid email is required.">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <div class="form-group">
+				                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Telefono">
+				                                        <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            <div >
+				                                <div>
+				                                    <div class="form-group">
+				                                        <textarea id="form_message" name="message" class="form-control" placeholder="Mensaje*" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                       <div class="help-block with-errors"></div>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    <input type="submit" class="btn-style btn-success btn-send" value="Enviar">
+				                                </div>
+				                            </div>                            
+				                        </div>
+
+				                    </form>
+						      	</div>
+						    </div>								    
+					  	</div>
+					</div>
+				</div>
+			</nav>
+		</div>		
+	</header>
+	<div class="side-tab-fixed">
+		<ul class="social-block">
+			<li>
+				<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+					<i class="fab fa-facebook-f" aria-hidden="true"></i>
+				</a>
+			</li>						
+			<li>
+				<a href="/" class="social-instagram" title="La Casa Grande en Instagram">
+					<i class="fab fa-instagram" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<main class="index-container">
+		<div class="top-main-index">
+			<img src="images/index/calle-grande-curve.png" >			
+		</div>
+		<div class="main-container">			
+			<div class="welcome-index">
+				<div class="welcome-txt-img">
+					<div class="first-container">
+						<div class="absolute-img">
+							<img src="images/index/Greca_T.png" >
+						</div>
+						<h1>Welcome</h1>
+						<h4>Enjoy all the activities <br>that this place has to offer.</h4>
+						<p>
+							In the downtown area of the City of San José del Cabo, you will find a large part of the history and culture of the region, which make this place a place to know and enjoy. Surrounded by the iconic style that the city represents, visitors identify and connect with walks full of stories, legends, art, culture, flavors and unique views of the place.
+						</p>
+					</div>
+					<div class="second-div">
+						<div class="img-container">
+							<img src="images/index/Foto_bienvenidos.jpg" >
+						</div>
+						<p>
+							You can walk calmly and enter the bars, restaurants, galleries, boutiques among others; and enjoy the relaxed atmosphere of the city, maybe have a complementary tequila, wine or cocktail, maybe some sandwiches, cheese or nuts, and at the same time learn a little more about the history of the region.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="establishment-index">
+				<div>
+					<h2>Establishments</h2>
+					<div id="brandSlider">
+						<ul class="slider__content">
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Casa_natalia.png" alt="Visita Casa_natalia en La Calle Grande">
+							</li>
+
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Choya_Rose.png" alt="Visita Choya_Rose en La Calle Grande">
+							</li>
+
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Goncanseco.png" alt="Visita Goncanseco en La Calle Grande">
+							</li>
+
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/La_Panaderia.png" alt="Visita La_Panaderia en La Calle Grande">
+							</li>
+
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Mollys.png" alt="Visita Mollys en La Calle Grande">
+							</li>
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Cafe_Dona_Nena.png" alt="Visita Cafe Dona Nena en La Calle Grande">
+							</li>
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Casa_Don_Rodrigo.png" alt="Visita Casa_Don_Rodrigo en La Calle Grande">
+							</li>
+							
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Casa_Opalo.png" alt="Visita Casa_Opalo en La Calle Grande">
+							</li>
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Mono.png" alt="Visita Mono en La Calle Grande">
+							</li>
+							
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Eduardo_Sanchez.png" alt="Visita Eduardo_Sanchez en La Calle Grande">
+							</li>
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Indira&Isidro.png" alt="Visita Indira&Isidro en La Calle Grande">
+							</li>
+							
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Mi_Cocina.png" alt="Visita Mi_Cocina en La Calle Grande">
+							</li>
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Taller_Maya.png" alt="Visita Taller_Maya en La Calle Grande">
+							</li>
+							<li class="slider__item">
+								<img class="slider__image" src="images/party-logos/Yumana_Kitchen.png" alt="Visita Yumana_Kitchen en La Calle Grande">
+							</li>							
+						</ul>
+						<div class="carousel-nav">
+							<a class="left carousel-control">
+								<i class="fa fa-chevron-left" aria-hidden="true"></i>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="right carousel-control">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="locals-index">
+				<div>
+					<div id="localSlider">
+						<ul class="slider__content">
+							<li class="slider__item">
+								<div class="slider__container">
+									<div>
+										<div class="txt-container">
+											<h2>Restaurants</h2>
+											<p>Enjoy a quiet and relaxed time in our restaurants with the best scenarios of good living that transport you to fully enjoy a few hours of pleasure, accompanied by the delicious flavor of each and every one of the dishes.</p>
+											<a href="/restaurants" title="Checa los Restaurantes en La Casa Grande">Explore</a>							
+										</div>
+										<div class="img-container">
+											<img src="images/index/Restaurantes.jpg" >
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div>
+										<div class="txt-container">
+											<h2>Shopping</h2>
+											<p> Calle Grande in San José del Cabo is a culturally diverse Mexican oasis at the southern tip of the Baja California Peninsula, where incredible experiences and incomparable shopping opportunities await you within its traditional boutiques and jewelers by the hand of Mexican artists. </p>
+											<a href="/shopping" title="Mira las tiendas cerca de La Casa Grande">Explore</a>								
+										</div>
+										<div class="img-container">
+											<img src="images/index/Compras.jpg" >
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div>
+										<div class="txt-container">
+											<h2>Hotels</h2>
+											<p> La Calle Grande offers tourists a more relaxed lifestyle, typical of the typical capital of a provincial town that preserves a more urban and family atmosphere. If you are looking for a place that mixes the tradition of a true Mexican town, La Calle Grande has attractive accommodation options, ideal to relax and unwind. </p>
+											<a href="/hotels" title="Registrate en uno de los Hoteles en La Casa Grande">Explore</a>
+										</div>
+										<div class="img-container">
+											<img src="images/index/Hoteles.jpg" >
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="slider__item">
+								<div class="slider__container">
+									<div>
+										<div class="txt-container">
+											<h2>Entertainment</h2>
+											<p> A good place to start your tour is in the heart of San José del Cabo, the tree-lined central plaza with its attractive bandstand and open-air amphitheater where a variety of cultural events take place. </p>											
+											<a href="/parking" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Explore</a>
+										</div>
+										<div class="img-container">
+											<img src="images/index/Entretenimiento.jpg" >
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="carousel-nav">
+							<a class="left carousel-control">
+								<i class="fa fa-chevron-left" aria-hidden="true"></i>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="right carousel-control">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="promos-index">
+				<div class="promos-container">
+					<h2>Promotions</h2>
+					<ul>
+						<li>
+							<div class="img-container">
+								<img src="images/index/Promocion1.jpg" >
+							</div>
+						</li>
+						<li>
+							<div class="img-container">
+								<img src="images/index/Promocion2.jpg" >
+							</div>
+						</li>
+						<li>
+							<div class="img-container">
+								<img src="images/index/promocion3.jpg" >
+							</div>
+						</li>
+						<li>
+							<div class="img-container">
+								<img src="images/index/Promocion4.jpg" >
+							</div>
+						</li>
+					</ul>
+					<a class="promos-link" href="/events" title="Checa Nuestras Promociones aqui en La Casa Grande">Read More</a>
+				</div>
+			</div>
+			<div class="social-index">
+				<div class="social-container">
+					<div class="txt-container">
+						<h2>Sign Up</h2>
+						<h4>La Calle Grande <span>Newsletter</span></h4>
+						<p>Subscribe to our newsletter and receive the most relevant news <br>as well as access to exclusive offers. </p>
+						<p>Subscribe Now!</p>
+						<div class="form-container">
+							<form action="/simple_email.php">
+							  <input class="txt-input" type="text" id="email" name="email" value="Email"><br>
+							  <input class="submit-input" type="submit" value="Send">
+							</form> 
+						</div>
+					</div>
+					<div class="img-container">						
+						<div class="link-container">
+							<div class="img-box">
+								<img src="images/index/Celular.png" >
+							</div>
+							<div class="static-img">
+								<img src="images/index/Foto_Circulo_News.png" >
+							</div>
+							<div class="img-mobile">
+								<img src="images/index/siguenos.png" >
+							</div>
+							<ul class="social-block">
+								<li>
+									<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+										<i class="fab fa-facebook-f" aria-hidden="true"></i>
+									</a>
+								</li>						
+								<li>
+									<a href="<%=TXT_SOCIAL_INSTAGRAM%>" target="_blank" class="social-instagram" title="La Casa Grande en Instagram">
+										<i class="fab fa-instagram" aria-hidden="true"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="map-index">
+				<h2>Virtual Map</h2>
+				<h4>Explore La Calle Grande</h4>
+				<p>Take a tour of the establishments that <br> make up La Calle Grande</p>
+				<div class="map-container">
+					<ul class="nav nav-pills nav-style" id="myTab" role="tablist">
+						<li class="pin-1">
+						    <a class="active" id="local1-tab" data-toggle="tab" href="#local1" role="tab" aria-controls="local1" aria-selected="true"><img src="images/map/1.png" ><span>Casa Natalia</span></a>
+						    
+						</li>
+						<li class="pin-2">
+						    <a id="local2-tab" data-toggle="tab" href="#local2" role="tab" aria-controls="local2" aria-selected="false"><img src="images/map/2.png" >
+						    <span>Café Doña Nena</span></a>
+						</li>
+						<li class="pin-3">
+						    <a id="local3-tab" data-toggle="tab" href="#local3" role="tab" aria-controls="local3" aria-selected="false"><img src="images/map/3.png"><span><span>La Panadería</span></span></a>
+						</li>
+						<li class="pin-4">
+						    <a id="local4-tab" data-toggle="tab" href="#local4" role="tab" aria-controls="local4" aria-selected="false"><img src="images/map/4.png" ><span>Mono</span></a>
+						</li>
+						<li class="pin-5">
+						    <a id="local5-tab" data-toggle="tab" href="#local5" role="tab" aria-controls="local5" aria-selected="false"><img src="images/map/5.png" ><span>Casa Don Rodrigo</span></a>
+						</li>
+						<li class="pin-6">
+						    <a id="local6-tab" data-toggle="tab" href="#local6" role="tab" aria-controls="local6" aria-selected="false"><img src="images/map/6.png" ><span>Yumana</span></a>
+						</li>
+						<li class="pin-7">
+						    <a id="local7-tab" data-toggle="tab" href="#local7" role="tab" aria-controls="local7" aria-selected="false"><img src="images/map/7.png" ><span>Bar Rickets</span></a>
+						</li>
+						<li class="pin-8">
+						    <a id="local8-tab" data-toggle="tab" href="#local8" role="tab" aria-controls="local8" aria-selected="false">
+						    	<img src="images/map/8.png" ><span>Moly´s Restaurante </span>
+						    </a>
+						</li>
+						<li class="pin-9">
+						    <a id="local9-tab" data-toggle="tab" href="#local9" role="tab" aria-controls="local9" aria-selected="false">
+						    	<img src="images/map/9.png" ><span>Mi Cocina</span>
+						    </a>
+						</li>
+						<li class="pin-10">
+						    <a id="local10-tab" data-toggle="tab" href="#local10" role="tab" aria-controls="local10" aria-selected="false"><img src="images/map/10.png" ><span>Cantina 29</span></a>
+						</li>
+						<li class="pin-11">
+						    <a id="local11-tab" data-toggle="tab" href="#local11" role="tab" aria-controls="local11" aria-selected="false"><img src="images/map/11.png" ><span>Casa del Ópalo</span></a>
+						</li>
+						<li class="pin-12">
+						    <a id="local12-tab" data-toggle="tab" href="#local12" role="tab" aria-controls="local12" aria-selected="false"><img src="images/map/12.png" ><span>Eduardo Sánchez</span></a>
+						</li>
+						<li class="pin-13">
+						    <a id="local13-tab" data-toggle="tab" href="#local13" role="tab" aria-controls="local13" aria-selected="false"><img src="images/map/13.png" ><span>Choya Rose</span></a>
+						</li>
+						<li class="pin-14">
+						    <a id="local14-tab" data-toggle="tab" href="#local14" role="tab" aria-controls="local14" aria-selected="false"><img src="images/map/14.png" ><span>Indira & Isidro Jewerly</span></a>
+						</li>
+						<li class="pin-15">
+						    <a id="local15-tab" data-toggle="tab" href="#local15" role="tab" aria-controls="local15" aria-selected="false"><img src="images/map/15.png" ><span>Sánchez & Luna Joyeria</span></a>
+						</li>
+						<li class="pin-16">
+						    <a id="local16-tab" data-toggle="tab" href="#local16" role="tab" aria-controls="local16" aria-selected="false"><img src="images/map/16.png" ><span>Goncanseco</span></a>
+						</li>
+						<li class="pin-interes1">
+						    <a id="locali1-tab" data-toggle="tab" href="#locali1" role="tab" aria-controls="locali1" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Casa de La Cultura</span></a>
+						</li>
+						<li class="pin-interes2">
+						    <a id="locali2-tab" data-toggle="tab" href="#locali2" role="tab" aria-controls="locali2" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Hombres Ilustres</span></a>
+						</li>
+						<li class="pin-interes3">
+						    <a id="locali3-tab" data-toggle="tab" href="#locali3" role="tab" aria-controls="locali3" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Obelisco</span></a>
+						</li>
+						<li class="pin-interes4">
+						    <a id="locali4-tab" data-toggle="tab" href="#locali4" role="tab" aria-controls="locali4" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Bandera Palacio Municipal</span></a>
+						</li>
+						<li class="pin-interes5">
+						    <a id="locali5-tab" data-toggle="tab" href="#locali5" role="tab" aria-controls="locali5" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Palacio Municipal</span></a>
+						</li>
+						<li class="pin-interes6">
+						    <a id="locali6-tab" data-toggle="tab" href="#locali6" role="tab" aria-controls="locali6" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Misión San José del Cabo</span></a>
+						</li>
+						<li class="pin-interes7">
+						    <a id="locali7-tab" data-toggle="tab" href="#locali7" role="tab" aria-controls="locali7" aria-selected="false"><img src="images/map/Sitio_interes.png" ><span>Paseo del Arte</span></a>
+						</li>
+						<li class="pin-bank1">
+						    <a id="localb1-tab" data-toggle="tab" href="#localb1" role="tab" aria-controls="localb1" aria-selected="false"><img src="images/map/Banco.png" ><span>Santander</span></a>
+						</li>
+						<li class="pin-bank2">
+						    <a id="localb2-tab" data-toggle="tab" href="#localb2" role="tab" aria-controls="localb2" aria-selected="false"><img src="images/map/Banco.png" ><span>BBVA</span></a>
+						</li>
+						<li class="pin-bank3">
+						    <a id="localb3-tab" data-toggle="tab" href="#localb3" role="tab" aria-controls="localb3" aria-selected="false"><img src="images/map/Banco.png" ><span>Banamex</span></a>
+						</li>
+						<li class="pin-parking1">
+						    <img src="images/map/Estacionamiento.png" ><span>Estacionamiento</span>
+						</li>
+						<li class="pin-parking2">
+						    <img src="images/map/Estacionamiento.png" ><span>Estacionamiento</span>
+						</li>
+
+					</ul>
+					<div class="tab-content" id="myTabContent">
+					  	<div class="tab-pane fade show active" id="local1" role="tabpanel" aria-labelledby="local1-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Casa_natalia.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares 4ª Centro.</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 146 7100" title="Marca a Casa_natalia">							
+	  										<span>(624) 146 7100</span>
+	  									</a>
+	  									<span> / </span>
+	  									<a href="tel:(624) 122 3219" title="Marca a Casa_natalia">							
+	  										<span>(624) 122 3219</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local2" role="tabpanel" aria-labelledby="local2-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Cafe_Doña_Nena.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #32, Local 01</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624)130 7487 " title="Marca a Café Doña Nena">								
+	  										<span>(624)130 7487 </span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local3" role="tabpanel" aria-labelledby="local3-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/La_Panaderia.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #32 local 03</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 172 6016" title="Marca a La_Panaderia">								
+	  										<span>(624) 172 6016 </span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local4" role="tabpanel" aria-labelledby="local4-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Mono.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #32 local 03</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 172 6016" title="Marca a Mono">								
+	  										<span>(624) 172 6016 </span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local5" role="tabpanel" aria-labelledby="local5-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Casa_Don_Rodrigo.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #29, Calle Grande, Centro </span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 142 0418" title="Marca a Casa_Don_Rodrigo">								
+	  										<span>(624) 142 0418</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local6" role="tabpanel" aria-labelledby="local6-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Yumana_Kitchen.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #10 Col. Centro </span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624)130 7487 " title="Marca a Yumana_Kitchen">							
+	  										<span>(624)130 7487 </span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local7" role="tabpanel" aria-labelledby="local7-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="https://via.placeholder.com/250x190.png?text=ComingSoon" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>TBD</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local8" role="tabpanel" aria-labelledby="local8-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Mollys.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>TBD</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>					  				
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local9" role="tabpanel" aria-labelledby="local9-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Mi_Cocina.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares 4ª Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 146 7100" title="Marca a Mi_Cocina">						
+	  										<span>(624) 146 7100</span>
+	  									</a>
+	  									<span> / </span>
+	  									<a href="tel:(624) 122 3219" title="Marca a Mi_Cocina">							
+	  										<span>(624) 122 3219</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local10" role="tabpanel" aria-labelledby="local10-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="https://via.placeholder.com/250x190.png?text=ComingSoon" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #29, Calle Grande, Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 142 0418" title="Marca a La Cantina">								
+	  										<span>(624) 142 0418</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local11" role="tabpanel" aria-labelledby="local11-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Casa_Opalo.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #34 Loc.3, Col. Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<div class="phone-container">
+					  					<a href="tel:(624) 146 9442" title="Marca a Casa_Opalo">						
+	  										<span>(624) 146 9442</span>
+	  									</a>
+	  									<span> / </span>
+	  									<a href="tel:(624) 212 4473" title="Marca a Casa_Opalo">						
+	  										<span>(624) 212 4473</span>
+	  									</a>
+					  				</div>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local12" role="tabpanel" aria-labelledby="local12-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Eduardo_Sanchez.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #10 Col. Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 105 2313" title="Marca a Eduardo_Sanchez">								
+	  										<span>(624) 105 2313</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local13" role="tabpanel" aria-labelledby="local13-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Choya_Rose.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #29, Calle Grande, Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:((624) 142 0418" title="Marca a Choya_Rose">								
+	  										<span>(624) 142 0418</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local14" role="tabpanel" aria-labelledby="local14-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Indira&Isidro.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Miguel Hidalgo #1, Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 146 9228" title="Marca a Indira&Isidro">								
+	  										<span>(624) 146 9228</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local15" role="tabpanel" aria-labelledby="local15-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="https://via.placeholder.com/250x190.png?text=ComingSoon" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>TBD</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>					  				
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local16" role="tabpanel" aria-labelledby="local16-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Goncanseco.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares #16, Centro Histórico</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 122 5031" title="Marca a Goncanseco">								
+	  										<span>(624) 122 5031</span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="local17" role="tabpanel" aria-labelledby="local17-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<img src="images/party-logos/Taller_Maya.png" >
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares # 32 Local #2 Plaza Don Carlos</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 122 5929 " title="Marca a Taller_Maya">								
+	  										<span>(624) 122 5929 </span>
+	  									</a>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali1" role="tabpanel" aria-labelledby="locali1-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="img-container">
+					  					<span>Casa de La Cultura</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Álvaro Obregon 1, Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 122 5929 " title="Marca a Taller_Maya">	
+	  										<span>(624) 122 5929 </span>
+	  									</a>
+					  				</div>
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> Lunes a Viernes 8:00 AM - 8:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali2" role="tabpanel" aria-labelledby="locali2-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Hombres Ilustres</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali3" role="tabpanel" aria-labelledby="locali3-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Obelisco</span>
+					  				</div>					  				
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali4" role="tabpanel" aria-labelledby="locali4-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Bandera Palacio Municipal</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali5" role="tabpanel" aria-labelledby="locali5-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Palacio Municipal</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Blvd. Mijares # 1433 Col. Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>					  				
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> 8:00 AM – 6:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali6" role="tabpanel" aria-labelledby="locali6-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Misión San José del Cabo</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Calle Zaragoza e Hidalgo</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="phone-container">
+					  					<a href="tel:(624) 142 0064" title="Marca a Taller_Maya">	
+	  										<span>(624) 142 0064</span>
+	  									</a>
+					  				</div>
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> 7:00 AM – 9:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="locali7" role="tabpanel" aria-labelledby="locali7-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Paseo del Arte</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Calle Morelos y Zaragoza</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> Jueves 5:00 PM – 9:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="localb1" role="tabpanel" aria-labelledby="localb1-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Santander</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Calle Ignacio Zaragoza, Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> 9:00 AM – 4:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="localb2" role="tabpanel" aria-labelledby="localb2-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>BBVA</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Calle Ignacio Zaragoza y José María Morelos</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> 9:00 AM – 4:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+					  	<div class="tab-pane fade" id="localb3" role="tabpanel" aria-labelledby="localb3-tab">
+					  		<div class="local-container">
+					  			<div>
+					  				<div class="title-container">
+					  					<span>Banamex</span>
+					  				</div>
+					  				<div class="address-container">
+					  					<span>Plaza José Green. Blvd. Antonio Mijares, Centro</span>
+					  					<span>San José del Cabo, B.C.S. </span>
+					  				</div>
+					  				<div class="hours-container">
+					  					<span><b>Horario:</b> 9:00 AM – 4:00 PM</span>
+					  				</div>
+					  			</div>
+					  		</div>
+					  	</div>
+
+					</div>
+					<div class="guides-pins">
+						<ul>
+							<li>
+								<div class="pin-container rest">
+									<span>Restaurants</span>
+								</div>
+							</li>
+							<li>
+								<div class="pin-container shop">
+									<span>Shopping</span>
+								</div>
+							</li>
+							<li>
+								<div class="pin-container enter">
+									<span>Entertainment</span>
+								</div>
+							</li>
+							<li>
+								<div class="pin-container">
+									<img src="images/map/Acotacion_sitio_interes.png" >
+									<span>Places of interest</span>
+								</div>
+							</li>
+							<li>
+								<div class="pin-container">
+									<img src="images/map/Acotacion_Banco.png" >
+									<span>Banks</span>
+								</div>
+							</li>
+							<li>
+								<div class="pin-container">
+									<img src="images/map/acotacion_estacionamiento.png" >
+									<span>Parking</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="gallery-index">
+				<h2>Gallery</h2>
+				<div id="gallerySlider">
+					<ul class="slider__content">
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria1.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria2.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria3.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria4.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria5.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria6.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria7.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria8.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria9.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria10.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>
+						<li class="slider__item">
+							<img class="slider__image" src="images/gallery/Galeria11.png" alt="Visita Casa_natalia en La Calle Grande">
+						</li>											
+					</ul>
+					<div class="carousel-nav">
+						<a class="left carousel-control">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</main>
+	<footer id="footer">
+		<div class="main-footer">
+			<div class="footer-logo" id="accordion1">
+				<div class="logo-img">
+					<a href="/index-en" title="La Casa Grande">
+						<img src="images/main-logo.png" >
+					</a>
+				</div>				
+				<a class="link-collapse" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+					<i class="fa fa-angle-down"></i></i>
+				</a>
+				<div id="collapse1" class="collapse-container collapse in">
+				  	<div class="footer-mail">
+				  		<h4>Email</h4>
+				  		<span>info@lacallegrande.com.mx</span>
+				  	</div>
+				  	<div class="footer-map">
+				  		<h4>Address</h4>
+				  		<span>Blvd. Mijares, Centro Historico</span>
+				  		<span>San José del Cabo, B.C.S</span>
+				  	</div>
+				</div>
+				
+			</div>
+			<div class="footer-links" id="accordion">
+				<h4>Links</h4>
+				<div class="link-collapse">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+						<i class="fa fa-angle-down"></i>
+					</a>
+				</div>				
+				<div id="collapse2" class="collapse-container collapse in">
+					<ul>
+						<li><a href="/history" title="Checa nuestra Historia en La Casa Grande">History</a></li>
+						<li><a href="/restaurants" title="Checa los Restaurantes en La Casa Grande">Restaurants</a></li>
+						<li><a href="/shopping" title="Mira las tiendas cerca de La Casa Grande">Shopping</a></li>
+						<li><a href="/hotels" title="Registrate en uno de los Hoteles en La Casa Grande">Hotels</a></li>
+						<li><a href="/entertainment" title="Explora los diversos centros de Entretenimiento en La Casa Grande">Entertainment</a></li>
+						<li><a href="/events" title="Mira todo nuestros Eventos en la Casa Grande">Events Calendar</a></li>		
+						<li><a href="/parking" title="Mira nuestros Estacionamiento">Parking</a></li>		
+					</ul>
+				</div>
+			</div>
+			<div class="footer-contact">
+				<h4>We hope to see you <span> soon!</span></h4>
+				<a class="contact-link" id="Ftr_Ctc_Btn" title="contactanos cuando lo deses aqui en La Casa Grande"><span>Contact Us</span><i class="fa fa-angle-right"></i></a>
+				<div id="Ftr_Contact_Modal" class="modal">
+				 	<!-- Modal content -->
+				  	<div class="modal-content">
+					    <div class="modal-header">
+						    <span class="Ftr_ctc_close">X</span>
+					    </div>
+					    <div class="modal-body">
+					    	<div class="img-container">
+					    		<img src="images/pop_up/foto_contactanos.jpg" >
+					    	</div>
+					      	<div class="txt-container">
+					      		<div class="img-box">
+					      			<img src="images/pop_up/La_Calle_Grande_Logo_Cafe.png" >
+					      		</div>
+					      		<div class="dealer-phone">
+					      			<h4>Reservaciones (624) xxx xxxx</h4>
+					      		</div>
+					      		<form id="contact-form" method="post" action="contact-us.php" role="form">
+			                        <div class="messages"></div>
+
+			                        <div class="controls">
+
+			                            <div class="form-row">
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Nombre" required="required" data-error="Firstname is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Apellidos" required="required" data-error="Lastname is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div class="form-row">
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Correo *" required="required" data-error="Valid email is required.">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <div class="form-group">
+			                                        <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Telefono">
+			                                        <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div >
+			                                <div>
+			                                    <div class="form-group">
+			                                        <textarea id="form_message" name="message" class="form-control" placeholder="Mensaje*" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                                   <div class="help-block with-errors"></div>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    <input type="submit" class="btn-style btn-success btn-send" value="Enviar">
+			                                </div>
+			                            </div>                            
+			                        </div>
+
+			                    </form>
+					      	</div>
+					    </div>								    
+				  	</div>
+				</div>
+				<div class="footer-social">
+					<h4>Follow Us</h4>
+					<ul class="social-block">
+						<li>
+							<a href="https://www.facebook.com/LaCasaGrandeBeloit" target="_blank" class="social-facebook" title="La Casa Grande en Facebook">
+								<i class="fab fa-facebook-f" aria-hidden="true"></i>
+							</a>
+						</li>						
+						<li>
+							<a href="/" class="social-instagram" title="La Casa Grande en Instagram">
+								<i class="fab fa-instagram" aria-hidden="true"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>	
+	<script src="js/multislider.js"></script>
+	<script>
+		$('#brandSlider').multislider({
+			continuous: false,
+			duration: 2500
+		});
+		$('#gallerySlider').multislider({
+			continuous: false,
+			duration: 2500
+		});
+		$('#localSlider').multislider({
+			continuous: false,
+			duration: 2500
+		});
+	</script> 
+	<script>
+		// Get the modal
+		var modal = document.getElementById("Contact_Modal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("Ctc_Btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("ctc_close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
+	<script>
+		// Get the modal
+		var modal = document.getElementById("Ftr_Contact_Modal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("Ftr_Ctc_Btn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("Ftr_ctc_close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		}
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>        
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js" integrity="sha256-dHf/YjH1A4tewEsKUSmNnV05DDbfGN3g7NMq86xgGh8=" crossorigin="anonymous"></script>
+	<script src="js/contact-us.js"></script>
+</body>
+</html>    

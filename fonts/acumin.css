@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Acumin';
+    src: local('AcuminVariableConcept'), url('/fonts/AcuminVariableConcept.otf') format('opentype');
+    font-weight: normal;
+}
